@@ -1,0 +1,655 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vn">
+<!-- Basic -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>APG - Shop Computer Online</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">   
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href='{% static "Computer/images/APG-50.png" %}' type="image/x-icon">
+    <link rel="apple-touch-icon" href='{% static "Computer/images/apple-touch-icon.png" %}'>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href='{% static "Computer/css/bootstrap.min.css" %}'>
+    <!-- Site CSS -->
+    <link rel="stylesheet" href='{% static "Computer/css/style.css" %}'>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href='{% static "Computer/css/responsive.css" %}'>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href='{% static "Computer/css/custom.css" %}'> 
+
+</head>
+
+<body>
+    <!-- Start Main Top -->
+    <div class="main-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="text-slid-box">
+                        <div id="offer-box" class="carouselTicker">
+                            <ul class="offer-box">
+                                <li>
+                                    <i class="fab fa-opencart"></i> Off 10%! Bàn Phím
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> 50% - 80% Linh Kiện PC
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> 20% off GiftCode: offT20
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> Off 50%! PC Doanh Nghiệp
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> Off 10%! Chuột máy tính
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> 50% - 80% VGA - Card Màn Hình
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> 20% off GiftCode: offT20
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> Off 50%! PC Đồ Họa
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="right-phone-box">
+                        <p>Ngày giờ hiện tại: <a href="#">{{now}}</a></p>
+                    </div>                   
+                    <div class="right-phone-box">
+                        <p>HỖ TRỢ KHÁCH HÀNG 24/7: <a href="#">1900 9099</a></p>
+                    </div>
+                   
+                    <div class="our-link">
+                        <ul>
+                            <li><a href="{% url 'Computer:index.html'%}">Home</a></li>
+                            {% if 'kh' in request.session %}
+								Hello {{ request.session.kh }}
+								<li><i class="ti-power-off"></i><a href="{% url 'khachhang:dangxuat.html'%}">Đăng Xuất</a></li>
+                                <li><i class="ti-power-off"></i><a href="{% url 'dathang:lichsumuahang.html'%}">Lịch Sử Mua Hàng</a></li>
+							{% else %}
+								<li><i class="ti-user"></i> <a href="{% url 'khachhang:dangky.html'%}">Đăng Ký</a></li>
+								<li><i class="ti-power-off"></i><a href="{% url 'khachhang:dangnhap.html'%}">Đăng Nhập</a></li>
+							{% endif %}
+                            <!-- <li><a href="{% url 'khachhang:dangky.html'%}">Đăng Ký</a></li>
+                            <li><a href="{% url 'khachhang:dangnhap.html'%}">Đăng Nhập</a></li>                             -->
+                            <li><a href="{% url 'dathang:taodonhang.html' %}">Thanh Toán</a></li>
+                            <li><a href="{% url 'Computer:contact.html'%}">Liên Hệ Chúng Tôi</a></li>                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Main Top -->
+
+    <!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <a class="navbar-brand" href="{% url 'Computer:index.html'%}"><img src='{% static "Computer/images/APG-50.png" %}' class="logo" alt=""></a>
+                </div>
+                <!-- End Header Navigation -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        {% if danhmuc %}
+                            {% for i in danhmuc %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'Computer:shop.html' i.pk %}">{{i.ten_loai}}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                        <!-- <li class="dropdown megamenu-fw">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">LapTop</a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-menu col-md-4">
+                                            <h6 class="title">LapTop Chuyên Game</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">ASUS</a></li>
+                                                    <li><a href="shop.html">ACER</a></li>
+                                                    <li><a href="shop.html">MSI</a></li>
+                                                    <li><a href="shop.html">GIGABYTE</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-4">
+                                            <h6 class="title">LapTop Đồ Họa</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">ASUS</a></li>
+                                                    <li><a href="shop.html">ACER</a></li>
+                                                    <li><a href="shop.html">MSI</a></li>
+                                                    <li><a href="shop.html">GIGABYTE</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-4">
+                                            <h6 class="title">LapTop Văn Phòng</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">ASUS</a></li>
+                                                    <li><a href="shop.html">ACER</a></li>
+                                                    <li><a href="shop.html">MSI</a></li>
+                                                    <li><a href="shop.html">GIGABYTE</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>                
+                                        
+                                    </div>
+                                    
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown megamenu-fw">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">PC</a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">PC Chuyên Game</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">PC - Intel</a></li>
+                                                    <li><a href="shop.html">PC - AMD</a></li>
+                                                    <li><a href="shop.html">PC Đồ Họa</a></li>
+                                                    <li><a href="shop.html">PC Doanh Nghiệp</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">PC Văn Phòng</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">PC - Intel</a></li>
+                                                    <li><a href="shop.html">PC - AMD</a></li>
+                                                    <li><a href="shop.html">PC Đồ Họa</a></li>
+                                                    <li><a href="shop.html">PC Doanh Nghiệp</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">PC Đồ Họa</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">PC - Intel</a></li>
+                                                    <li><a href="shop.html">PC - AMD</a></li>
+                                                    <li><a href="shop.html">PC Đồ Họa</a></li>
+                                                    <li><a href="shop.html">PC Doanh Nghiệp</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">PC Doanh Nghiệp</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">PC PC Doanh Nghiệp</a></li>
+                                                    <li><a href="shop.html">PC PC Doanh Nghiệp</a></li>
+                                                    <li><a href="shop.html">PC PC Doanh Nghiệp</a></li>
+                                                    <li><a href="shop.html">PC PC Doanh Nghiệp</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown megamenu-fw">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Linh Kiện PC</a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">Linh Kiện PC</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">RAM</a></li>
+                                                    <li><a href="shop.html">CPU</a></li>
+                                                    <li><a href="shop.html">MAIN</a></li>
+                                                    <li><a href="shop.html">VGA - Card Màn Hình</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">LapTop</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">Laptop theo thương hiệu</a></li>
+                                                    <li><a href="shop.html">Laptop theo giá</a></li>
+                                                    <li><a href="shop.html">Laptop theo CPU</a></li>
+                                                    <li><a href="shop.html">Laptop theo nhu cầu</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">PC Doanh Nghiệp</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">PC - Intel</a></li>
+                                                    <li><a href="shop.html">PC - AMD</a></li>
+                                                    <li><a href="shop.html">PC Đồ Họa</a></li>
+                                                    <li><a href="shop.html">PC Doanh Nghiệp</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">Màn hình</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">Kích thước</a></li>
+                                                    <li><a href="shop.html">Hãng Sản Xuất</a></li>
+                                                    <li><a href="shop.html">Giá Tiền</a></li>
+                                                    <li><a href="shop.html">Độ Phân Giải</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown megamenu-fw">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Màn Hình</a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">Linh Kiện PC</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">RAM</a></li>
+                                                    <li><a href="shop.html">CPU</a></li>
+                                                    <li><a href="shop.html">MAIN</a></li>
+                                                    <li><a href="shop.html">VGA - Card Màn Hình</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">LapTop</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">Laptop theo thương hiệu</a></li>
+                                                    <li><a href="shop.html">Laptop theo giá</a></li>
+                                                    <li><a href="shop.html">Laptop theo CPU</a></li>
+                                                    <li><a href="shop.html">Laptop theo nhu cầu</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">PC Doanh Nghiệp</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">PC - Intel</a></li>
+                                                    <li><a href="shop.html">PC - AMD</a></li>
+                                                    <li><a href="shop.html">PC Đồ Họa</a></li>
+                                                    <li><a href="shop.html">PC Doanh Nghiệp</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">Màn hình</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">Kích thước</a></li>
+                                                    <li><a href="shop.html">Hãng Sản Xuất</a></li>
+                                                    <li><a href="shop.html">Giá Tiền</a></li>
+                                                    <li><a href="shop.html">Độ Phân Giải</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown megamenu-fw">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Bàn Phím & Chuột</a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">Linh Kiện PC</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">RAM</a></li>
+                                                    <li><a href="shop.html">CPU</a></li>
+                                                    <li><a href="shop.html">MAIN</a></li>
+                                                    <li><a href="shop.html">VGA - Card Màn Hình</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">LapTop</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">Laptop theo thương hiệu</a></li>
+                                                    <li><a href="shop.html">Laptop theo giá</a></li>
+                                                    <li><a href="shop.html">Laptop theo CPU</a></li>
+                                                    <li><a href="shop.html">Laptop theo nhu cầu</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">PC Doanh Nghiệp</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">PC - Intel</a></li>
+                                                    <li><a href="shop.html">PC - AMD</a></li>
+                                                    <li><a href="shop.html">PC Đồ Họa</a></li>
+                                                    <li><a href="shop.html">PC Doanh Nghiệp</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-menu col-md-3">
+                                            <h6 class="title">Màn hình</h6>
+                                            <div class="content">
+                                                <ul class="menu-col">
+                                                    <li><a href="shop.html">Kích thước</a></li>
+                                                    <li><a href="shop.html">Hãng Sản Xuất</a></li>
+                                                    <li><a href="shop.html">Giá Tiền</a></li>
+                                                    <li><a href="shop.html">Độ Phân Giải</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            </ul>
+                        </li>                         -->
+                        <!-- <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Cửa Hàng</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="cart.html">Giỏ Hàng</a></li>
+                                <li><a href="checkout.html">Thanh Toán</a></li>
+                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
+                                <li><a href="wishlist.html">Danh sách yêu thích</a></li>
+                                <li><a href="shop-detail.html">Chi tiết sản phẩm</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="service.html">Our Service</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li> -->
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                        <li class="side-menu"><a href="#">
+						<i class="fa fa-shopping-bag"></i>
+                            <span class="badge">{{cart.sum}}</span>
+					</a></li>
+                    </ul>
+                </div>
+                <!-- End Atribute Navigation -->
+            </div>
+            <!-- Start Side Menu -->
+            <div class="side">
+                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                <li class="cart-box">
+                    <ul class="cart-list">
+                        {% for i in cart %}
+							{% with product=i.product %}	
+                        <li>
+                            <a href="{% url 'Computer:sanpham.html' product.pk %}" class="photo"><img src="{{product.hinh_anh.url}}" class="cart-thumb" alt="" /></a>
+                            <h6><a href="{% url 'Computer:sanpham.html' product.pk %}">{{product.ten_sp}}</a></h6>
+                            <p>{{i.quantity}} - <span class="price">{% load humanize %}{{product.don_gia|floatformat:0|intcomma}}</span></p>
+                        </li>
+                            {% endwith %}
+						{% endfor %}
+                        <!-- <li>
+                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">Omnes ocurreret</a></h6>
+                            <p>1x - <span class="price">$60.00</span></p>
+                        </li>
+                        <li>
+                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">Agam facilisis</a></h6>
+                            <p>1x - <span class="price">$40.00</span></p>
+                        </li> -->
+                        <li class="total">
+                            <a href="{% url 'giohang:cart_detail'%}" class="btn btn-default hvr-hover btn-cart">Xem Giỏ Hàng</a>
+                            <span class="float-right"><strong>Tổng tiền: </strong>{% load humanize %}{{cart.get_total_price|floatformat:0|intcomma}} đ</span>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+            <!-- End Side Menu -->
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+    <div class="top-search">
+        <!-- <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search" value="{{search_str}}">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
+        </div> -->
+        <form action="{% url 'Computer:search.html' %}" method="GET" name="search_form">
+            <div class="search-bar">                
+                <input name="name" placeholder="Tìm sản phẩm....." type="search"
+                    value="{{search_str}}">
+                <button class="btnn"><i class="ti-search">Search</i></button>
+            </div>
+        </form>
+    </div>
+    <!-- End Top Search -->
+    {% block body_block %}
+    
+    {% endblock %}
+    <!-- Start Instagram Feed  -->
+    <!-- <div class="instagram-box">
+        <div class="main-instagram owl-carousel owl-theme">
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-01.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-02.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-03.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-04.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-05.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-06.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-07.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-08.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-09.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="images/instagram-img-05.jpg" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- End Instagram Feed  -->
+
+    <!-- Start Footer  -->
+    <footer>
+        <div class="footer-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-widget">
+                            <h4>APG-Shop</h4>
+                            <p>APG-Shop - Mua PC Gaming, laptop gaming, card màn hình, màn hình máy tính, ghế gaming, thiết bị chơi game như PS5 hàng đầu Việt Nam bảo hành chính hãng. Mua online nhận ưu đãi hấp dẫn với nhiều chương trình đặc biệt như Black Friday, G-Fest, Cyber Monday - Địa Chỉ : Trần Phong Sắc, Phường 2, TP Tân An, Long An- Website : www.apgshop.com- Hotline : 00x0x0x0
+                                </p>
+                            <ul>
+                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link">
+                            <h4>Chính Sách - Dịch Vụ</h4>
+                            <ul>
+                                <li><a href="#">Dịch Vụ Thanh Toán</a></li>
+                                <li><a href="#">Dịch Vụ Khách Hàng</a></li>
+                                <li><a href="#">Dịch Vụ Trả Góp</a></li>
+                                <li><a href="#">Chính Sách Bảo Hành</a></li>
+                                <li><a href="#">Chính Sách Hảo Mật</a></li>
+                                <li><a href="#">Chính Sách Giao Hàng</a></li>
+                                <li><a href="#">Địa Chỉ Google Map</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="footer-link-contact">
+                            <h4>Liên Hệ Chúng Tôi</h4>
+                            <ul>
+                                <li>
+                                    <p><i class="fas fa-map-marker-alt"></i>Địa Chỉ: Trần Phong Sắc <br>Phường 2,<br> TP Tân An, Long An </p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">01275117609</a></p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">vanvuvo@gmail.com</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer  -->
+
+    <!-- Start copyright  -->
+    <div class="footer-copyright">
+        <p class="footer-company">Bản quyền &copy; 2023 <a href="#">APGShop</a> Design By :
+            <a href="https://html.design/">T3h - ClassOnline</a></p>
+    </div>
+    <!-- End copyright  -->
+
+    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
+    <!-- ALL JS FILES -->
+    <script src='{% static "Computer/js/jquery-3.2.1.min.js" %}'></script>
+    <script src='{% static "Computer/js/popper.min.js" %}'></script>
+    <script src='{% static "Computer/js/bootstrap.min.js" %}'></script>
+    <!-- ALL PLUGINS -->
+    <script src='{% static "Computer/js/jquery.superslides.min.js" %}'></script>
+    <script src='{% static "Computer/js/bootstrap-select.js" %}'></script>
+    <script src='{% static "Computer/js/inewsticker.js" %}'></script>
+    <script src='{% static "Computer/js/bootsnav.js." %}'></script>
+    <script src='{% static "Computer/js/images-loded.min.js" %}'></script>
+    <script src='{% static "Computer/js/isotope.min.js" %}'></script>
+    <script src='{% static "Computer/js/owl.carousel.min.js" %}'></script>
+    <script src='{% static "Computer/js/baguetteBox.min.js" %}'></script>
+    <script src='{% static "Computer/js/form-validator.min.js" %}'></script>
+    <script src='{% static "Computer/js/contact-form-script.js" %}'></script>
+    <script src='{% static "Computer/js/custom.js" %}'></script>
+</body>
+
+</html>

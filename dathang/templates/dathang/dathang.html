@@ -1,0 +1,152 @@
+{% extends "Computer/base.html" %}
+{% load static %}
+{% block body_block %}
+
+<!-- Start Checkout -->
+<section class="cart-box-main">
+	<div class="container">
+		<form class="form" method="POST" action="{% url 'dathang:taodonhang.html'%}">
+			<div class="row">
+				<!-- Form -->
+				<div class="col-sm-6 col-lg-6 mb-3">
+					<div class="checkout-form">
+						<div class="title-left">
+							<h3>Thông tin khách hàng</h3>						
+						</div>
+						<div class="title-left">
+							<h4><p>Xin chào Tài Khoản {{request.session.kh}}. Vui lòng nhập thông tin đơn hàng!</p></h4>
+						</div>		
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<div class="form-group">
+									<input type="hidden" value="{{username}}" name="username"/>
+									<label>Họ Tên Người Nhận Hàng <span>*</span></label>
+									{{form.full_name}}
+								</div>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<div class="form-group">
+									<label>Địa Chỉ Email <span>*</span></label>
+									{{form.email}}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<div class="form-group">
+									<label>Số điện thoại <span>*</span></label>
+									{{form.phone}}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<div class="form-group">
+									<label>Địa chỉ giao hàng <span>*</span></label>
+									{{form.address}}
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-6 mb-3">
+					<div class="row">
+						<div class="col-md-12 col-lg-12">
+							<div class="col-md-12 col-lg-12">
+								<div class="odr-box">
+									<div class="title-left">
+										<h3>Thông Tin Giỏ Hàng</h3>
+									</div>
+									{% for item in cart %}
+										{% with product=item.product %}
+									<div class="rounded p-2 bg-light">
+										<div class="media mb-2 border-bottom">
+											<div class="media-body"> <a href="{% url 'Computer:sanpham.html' product.pk %}">{{ product.ten_sp }}</a>
+												<div class="small text-muted">Đơn Giá: {% load humanize %}{{product.don_gia|floatformat:0|intcomma}} <span class="mx-2">|</span> Số Lượng: {{ item.quantity }} <span class="mx-2">|</span> Thành Tiền: {% load humanize %}{{item.total_price|floatformat:0|intcomma}} đ</div>
+											</div>
+										</div>                                    
+									</div>
+										{% endwith %}
+									{% endfor %}
+								</div>
+							</div>
+							<div class="col-md-12 col-lg-12">
+								<div class="order-box">
+									<div class="title-left">
+										<h3><b>Thông tin Đơn Hàng</b></h3>
+									</div>
+									<div class="d-flex">
+										<div class="font-weight-bold">Giá Sản Phẩm</div>
+										<div class="ml-auto font-weight-bold">Tổng tiền</div>
+									</div>
+									<hr class="my-1">
+									<div class="d-flex">
+										<h4>Tạm tính</h4>
+										<div class="ml-auto font-weight-bold">{% load humanize %}{{cart.get_total_price|floatformat:0|intcomma}} đ</div>
+									</div>
+									<div class="d-flex">
+										<h4>Phí Giao Hàng</h4>
+										<div class="ml-auto font-weight-bold"> 0 đ </div>
+									</div>
+									
+									<div class="d-flex gr-total">
+										<h5>Tổng Tiền Đơn hàng</h5>
+										<div class="ml-auto h5">{% load humanize %}{{cart.get_total_price|floatformat:0|intcomma}} đ</div>
+									</div>
+									<hr> 
+								</div>
+							</div>
+							<div class="col-12 d-flex shopping-box"> 
+								<!-- <a href="checkout.html" class="ml-auto btn hvr-hover">Place Order</a>  -->
+								<div class="button">
+									<button type="submit" class="ml-auto btn hvr-hover">Đặt hàng</button>
+									{% csrf_token %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- <div class="col-lg-4 col-12">
+					<div class="order-details">					
+						<div class="single-widget">
+							<h2>THÔNG TIN GIỎ HÀNG</h2>
+							<div class="content">
+								<ul>
+									{% for item in cart %}
+									<li>
+										{{ item.quantity }}x {{ item.product.name }}
+										<span>{% load humanize %}{{item.total_price|floatformat:0|intcomma}} đ</span>
+									</li>
+									{% endfor %}
+								</ul>
+								<ul>
+									<li>
+										<hr />
+									</li>
+									<li>Tạm tính<span>{% load humanize %}{{cart.get_total_price|floatformat:0|intcomma}} đ</span></li>
+									<li>(+) Giao hàng<span>0 đ</span></li>
+									<li class="last">Tổng đơn hàng<span>{% load humanize %}{{cart.get_total_price|floatformat:0|intcomma}} đ</span></li>
+								</ul>
+							</div>
+						</div>					
+						<div class="single-widget get-button">
+							<div class="content">
+								<div class="button">
+									<button type="submit" class="btn ">Đặt hàng</button>
+									{% csrf_token %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>		
+		</form>
+		<!--/ End Form -->
+	</div>
+</section>
+<!--/ End Checkout -->
+
+{% endblock %}

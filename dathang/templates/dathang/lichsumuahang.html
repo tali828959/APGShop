@@ -1,0 +1,38 @@
+{% extends "Computer/base.html" %}
+{% load static %}
+{% block body_block %}
+
+<!-- Start Checkout -->
+<section class="cart-box-main">
+	<div class="container">		
+		<div class="row">
+			<div class="col-sm-9 col-lg-9 mb-9	">
+				<div class="row">
+					<div class="col-md-12 col-lg-12">														
+						<div class="title-left">
+							<h3>Lịch Sử Mua Hàng</h3>
+						</div>
+						<h4> Danh sách đơn hàng đã mua</h4>	
+						<table class="table">
+							<th>STT</th>
+							<th>Ngày Mua</th>
+							<th>Tên Sản Phẩm</th>
+							<th>Giá Tiền</th>
+							<th>Số Lượng</th>
+							{% for item in ls%}
+							<tr>
+								{% for i in item%}
+								<td>{{i}}</td>
+								{% endfor%}
+							</tr>
+							{%endfor%}								
+						</table>								
+					</div>						
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--/ End Checkout -->
+
+{% endblock %}

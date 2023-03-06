@@ -1,0 +1,103 @@
+{% extends "Computer/base.html" %}
+{% load static %}
+{% block body_block %}
+
+    <!-- Start All Title Box -->
+    <!-- <div class="all-title-box"> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Liên Hệ Chúng Tôi</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active"> Liên Hệ </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <!-- </div> -->
+    <!-- End All Title Box -->
+
+    <!-- Start Contact Us  -->
+    <div class="contact-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-12">
+                    <div class="contact-info-left">
+                        <h2>Thông Tin Cửa Hàng</h2>
+                        <p>APGShop là một công ty cung cấp linh phụ kiện máy tính ở thành phố Hồ Chí Minh. Được biết, đây cũng là một đơn vị cung cấp cho thị trường công nghệ nhiều sản phẩm từ trung đến cao cấp</p>
+                        <ul>
+                            <li>
+                                <p><i class="fas fa-map-marker-alt"></i>Trần Phong Sắc, Phường 2, <br>TP Tân An,<br> Long An</p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">01275117609</a></p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">vanvuvo@gmail.com</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-sm-12">
+                    <div class="contact-form-right">
+                        <h1>{{result}}</h1>
+                        <h2>XIN HÂN HẠNH ĐƯỢC HỖ TRỢ QUÝ KHÁCH</h2>
+                        <p>Quý khách đang quan tâm về vấn đề nào vui lòng liên hệ! Chúng tối sẽ phản hồi thông tin sớm nhất có thể!</p>
+                        <form class="row" id="fh5co_contact_form" action="{% url 'Computer:contact.html' %}" method="POST">
+                            {% csrf_token %} 
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- <input type="text" class="form-control" id="name" name="name" placeholder="Họ tên của bạn" required data-error="Please enter your name"> -->
+                                        {{form.hoten}}
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- <input type="text" placeholder="Mail của bạn" id="email" class="form-control" name="name" required data-error="Please enter your email"> -->
+                                        {{form.email}} 
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                                                         
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- <input type="text" placeholder="Số điện thoại của bạn" id="phone" class="form-control" name="name" required data-error="Please enter your phone"> -->
+                                        {{form.sdt}}
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- <input type="text" class="form-control" id="subject" name="name" placeholder="Chủ đề quan tâm" required data-error="Please enter your Subject"> -->
+                                        {{form.chude}}
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- <textarea class="form-control" id="message" placeholder="Mô tả chi tiết" rows="4" data-error="Write your message" required></textarea> -->
+                                        {{form.noidung}}
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    
+                                    <div class="submit-button text-center">
+                                        <button class="btn hvr-hover" id="submit" type="submit">Gửi Liên Hệ</button>
+                                        <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Cart -->
+
+{% endblock %}

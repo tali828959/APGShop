@@ -1,0 +1,39 @@
+{% extends "Computer/base.html" %}
+{% load static %}
+{% block body_block %}
+
+<!-- Start Checkout -->
+<section class="cart-box-main">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-lg-6 mb-3">
+				<div class="title-left">
+					<h2>Thông Báo</h2>
+				</div>
+				<div class="checkout-form">					
+					<p>Quý khách <b>{{order.full_name}} </b> đã đặt hàng thành công. </p>
+					<p>Đơn hàng của quý khách có mã số là: {{order.id }}</p>
+				</div>
+			</div>
+			<div class="col-sm-6 col-lg-6 mb-3">
+				<div class="title-left">
+					<h2>Thông Tin Giao Hàng</h2>
+				</div>
+				<div class="order-details">					
+					<div class="single-widget">						
+						<div class="content">
+							<ul>
+								<li>Phone: {{order.phone}}</li>
+								<li>Email: {{order.email}}</li>
+								<li>Địa chỉ giao hàng: {{order.address}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--/ End Checkout -->
+
+{% endblock %}
